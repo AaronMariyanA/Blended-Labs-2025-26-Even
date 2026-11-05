@@ -94,6 +94,6 @@ This lab provided hands-on experience with AWS IAM by demonstrating how organiza
 
 
 ## Author
-**Name:** Abishek P 212224240002
+**Name:** Aaron Mariyan A 212224040004
 **Course:** Introduction to Cloud Computing  
 
