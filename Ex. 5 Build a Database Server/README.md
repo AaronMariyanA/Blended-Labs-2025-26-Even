@@ -1,16 +1,16 @@
-# Lab 4 – Working with Amazon Elastic Block Store (EBS)
+# Lab 5 – Build a Database Server (AWS)
 
 ## Author
 
-* **Name**: ________________________________
-* **Register Number**: _____________________
-* **Date of Submission**: __________________
+* **Name**: Abishek P
+* **Register Number**: 212224240002
+* **Date of Submission**: 21-11-26
 
 ---
 
 ## Objective
 
-The objective of this experiment is to understand how Amazon Elastic Block Store (EBS) provides persistent block-level storage for EC2 instances. This lab focuses on creating and attaching an EBS volume, formatting and mounting it on an EC2 instance, storing data, and verifying data persistence after instance reboot.
+The objective of this experiment is to understand how to deploy and configure a database server in AWS. This lab focuses on launching an EC2 instance, installing a database management system (DBMS), configuring basic database settings, creating a sample database, and validating connectivity to the database server.
 
 ---
 
@@ -18,8 +18,8 @@ The objective of this experiment is to understand how Amazon Elastic Block Store
 
 * Basic understanding of cloud computing concepts
 * AWS account or AWS Academy Lab access
-* An existing EC2 instance (Amazon Linux 2 preferred)
-* Basic knowledge of Linux commands
+* An existing VPC and EC2 knowledge (from previous labs)
+* Basic knowledge of Linux commands and SQL
 
 ---
 
@@ -27,87 +27,99 @@ The objective of this experiment is to understand how Amazon Elastic Block Store
 
 * AWS Management Console
 * Amazon EC2
-* Amazon EBS
+* Security Groups
 * SSH Client (Terminal / PuTTY)
+* MySQL / MariaDB / PostgreSQL (any one)
 
 ---
 
 ## Tasks Performed
 
-### Task 1: Explore Amazon EBS
+### Task 1: Launch EC2 Instance for Database Server
 
-Explore the Amazon EBS service through the EC2 dashboard. Observe different volume types such as General Purpose SSD (gp2/gp3), Provisioned IOPS SSD, Throughput Optimized HDD, and Cold HDD.
-
----
-
-### Task 2: Create an EBS Volume
-
-Create a new EBS volume in the same Availability Zone as the EC2 instance. Choose an appropriate size and volume type.
+Launch a new EC2 instance using Amazon Linux 2 AMI. Select an appropriate instance type and configure key pair and security group.
 
 ---
 
-### Task 3: Attach EBS Volume to EC2 Instance
+### Task 2: Configure Security Group for Database Access
 
-Attach the created EBS volume to the running EC2 instance as an additional block device.
+Modify the security group to allow:
 
----
-
-### Task 4: Format the EBS Volume
-
-Connect to the EC2 instance using SSH and format the attached volume with a file system (for example, ext4).
+* SSH (Port 22) for remote access
+* Database port (e.g., MySQL – 3306 or PostgreSQL – 5432)
 
 ---
 
-### Task 5: Mount the EBS Volume
+### Task 3: Connect to EC2 Instance
 
-Mount the formatted volume to a directory in the EC2 instance (for example, /data or /mnt/ebs).
-
----
-
-### Task 6: Store Data in EBS Volume
-
-Create files and directories inside the mounted EBS volume and store sample data.
+Connect to the EC2 instance using SSH from your local machine.
 
 ---
 
-### Task 7: Verify Data Persistence
+### Task 4: Install Database Server
 
-Reboot the EC2 instance and verify that the data stored in the EBS volume is still available after reboot.
+Install a database server software such as MySQL, MariaDB, or PostgreSQL on the EC2 instance using package manager commands.
+
+---
+
+### Task 5: Start and Configure Database Service
+
+Start the database service and configure basic settings such as root password and user privileges.
+
+---
+
+### Task 6: Create a Sample Database
+
+Create a sample database and a table inside it. Insert a few records into the table.
+
+---
+
+### Task 7: Test Database Connectivity
+
+Test the database server by connecting to it locally or remotely and performing basic SQL queries.
 
 ---
 
 ## Workflow (Student Explanation)
 
-(Write the steps you followed in your own words)
+1. Create RDS Security Group: Create DB Security Group and allow MySQL/Aurora traffic on port 3306 from Web Security Group.
 
-1. ---
-2. ---
-3. ---
-4. ---
-5. ---
+2. Create DB Subnet Group: Create DB-Subnet-Group in Lab VPC using subnets 10.0.1.0/24 and 10.0.3.0/24 across two Availability Zones.
+
+3. Create RDS Database: Launch a MySQL Multi-AZ DB instance named lab-db with username main, password lab-password, and database name lab.
+
+4. Connect Web Application: Copy the RDS endpoint and connect the web application using the database name, username, and password. Test adding, editing, and deleting contacts.
+
+5. Submit and Verify: Submit the lab, check the Grades panel and Submission Report, and then end the lab.
 
 ---
 
 ## Output Screenshots (Attach 3)
 
-### Screenshot 1: EBS Volume Created
+### Screenshot 1: EC2 Instance for Database Server
 
-(Insert Screenshot Here)
+<img width="1257" height="552" alt="image" src="https://github.com/user-attachments/assets/7b7feb71-1ad2-4d34-a029-12e397b4013a" />
 
----
-
-### Screenshot 2: EBS Volume Attached to EC2
-
-(Insert Screenshot Here)
 
 ---
 
-### Screenshot 3: Mounted Volume with Data
+### Screenshot 2: Database Service Running
+<img width="1262" height="557" alt="image" src="https://github.com/user-attachments/assets/3c96d7e2-cb46-4957-bacb-891c93075f40" />
 
-(Insert Screenshot Here)
+
+<img width="1915" height="907" alt="image" src="https://github.com/user-attachments/assets/93b23f30-d310-4853-9bae-6e763dcc384e" />
 
 ---
 
-## Result / Conclusion
+### Screenshot 3: Sample Database and Table
+<img width="1130" height="590" alt="image" src="https://github.com/user-attachments/assets/d2eb946f-49fb-43ac-90fa-427924479357" />
 
-This experiment demonstrated how Amazon EBS provides persistent storage for EC2 instances. By creating, attaching, formatting, and mounting an EBS volume, and by verifying data after reboot, the concept of durable block storage in the cloud was clearly understood.
+
+<img width="1903" height="903" alt="image" src="https://github.com/user-attachments/assets/9db6433a-5c3f-4911-89ac-26983f7c5b1a" />
+
+
+---
+
+## Result
+
+This experiment demonstrated how to build a database server in AWS using an EC2 instance. By installing and configuring a DBMS, creating a sample database, and testing connectivity, the fundamentals of hosting and managing a cloud-based database server were underst
